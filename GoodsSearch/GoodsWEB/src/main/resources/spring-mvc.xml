@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+     xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 打开SpringMVC的注解 -->
+	<annotation-driven />
+
+    <!-- 设置默认配置方案 -->
+    <mvc:annotation-driven/>
+
+    <!-- 使用默认的Servlet来响应静态文件 -->
+    <mvc:default-servlet-handler/>
+	<!-- 配置静态资源的目录 -->
+	<!--<resources mapping="/resources/**" location="" />-->
+
+	<!-- 配置视图处理器 -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 视图前缀 -->
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<!-- 视图后缀 -->
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <!-- 用户登录拦截器 -->
+        <mvc:interceptor>
+            <!-- 拦截路径 -->
+            <mvc:mapping path="/goods/**"/>
+            <beans:bean id="userLoginInterceptor" class="edu.hhu.interceptor.UserLoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans:beans>
+
+
+
+
+
+
+
+
+
+
+
